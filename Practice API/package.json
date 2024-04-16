@@ -1,20 +1,17 @@
 {
-  "name": "practice",
+  "name": "practice-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node inde.js",
-    "dev": "nodemon inde.js"
+    "start": "node index.js",
+    "dev" : "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "mongoose": "^8.3.1"
+    "express": "^4.19.2"
   }
 }
