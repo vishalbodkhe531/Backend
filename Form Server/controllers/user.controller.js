@@ -4,7 +4,6 @@ import bcryptjs from "bcryptjs";
 
 export const UserCreate = async (req,res,next) =>{
    try {
-      console.log(req.body);
     const {name,email,password} = req.body
 
     const IsUser = await User.findOne({email});
@@ -14,7 +13,11 @@ export const UserCreate = async (req,res,next) =>{
 
     await User.create({name,email,password : hashPass});
     
-    res.status(201).json({success : true,msg : "User successfully created"});
+   //  res.status(201).json({success : true,msg : "User successfully created"});
+   res.render("index",{
+      path : "/api/user/logout",
+      btn : "logout"
+   })
 
    } catch (error) {
     next(error)
@@ -32,7 +35,11 @@ export const UserLogin = async (req,res,next) =>{
 
      if(!PassMatch) return next(errorHandler(400,"Incorrect password"));
  
-     res.status(201).json({success : true,msg : `Welcome ${IsExist.name}`});
+   //   res.status(201).json({success : true,msg : `Welcome ${IsExist.name}`})
+   res.render("index",{
+      path : "/api/user/logout",
+      btn : "Logout"
+   })
  
     } catch (error) {
      next(error)

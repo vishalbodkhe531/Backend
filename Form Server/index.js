@@ -19,7 +19,10 @@ server.use(express.json());
 server.use("/api/user",routes)
 
 server.get("/",(req,res)=>{
-    res.render("index");
+    res.render("index",{
+        path : "/login",
+        btn : "Login"
+    });
 })
 
 server.get("/login",(req,res)=>{

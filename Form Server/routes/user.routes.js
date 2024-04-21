@@ -5,5 +5,15 @@ const routes = express.Router();
 
 routes.post("/login",UserLogin);
 routes.post("/register",UserCreate);
+routes.get("/logout",(req,res) =>{
+    try {
+        res.render("index",{
+            path : "/login",
+            btn : "Login"
+        })
+    } catch (error) {
+        
+    }
+})
 
 export default routes
