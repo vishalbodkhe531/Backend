@@ -4,6 +4,8 @@ import { DatabaseConnection } from "./config/data/data.js";
 import routes from "./routes/user.routes.js";
 import { errorMiddleware } from "./middleware/user.middleware.js";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import { isAuthenticated } from "./middleware/auth.js";
 config({path : "./config/.env"});
 DatabaseConnection();
 
@@ -16,9 +18,11 @@ server.use(bodyParser.urlencoded({extended : false}));
 
 server.use(express.json());
 
+server.use(cookieParser());
+
 server.use("/api/user",routes)
 
-server.get("/",(req,res)=>{
+server.get("/",isAuthenticated,(req,res)=>{
     res.render("index",{
         path : "/login",
         btn : "Login"

@@ -52,7 +52,7 @@ export const UserLogin = async (req, res, next) => {
 
 export const Userlogout = (req, res, next) => {
    try {
-      res.render("index", {
+      res.clearCookie("token").render("index", {
          path: "/login",
          btn: "Login"
       })
