@@ -3,11 +3,10 @@ import { errorHanddler } from "../utils/error.Handdler.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 
+//Here !!  User Create
 export const userCreate = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-
-    console.log(req.body);
 
     const IsExist = await User.findOne({ email });
     if (IsExist) return next(errorHanddler(400, "User already existed"));
@@ -21,6 +20,8 @@ export const userCreate = async (req, res, next) => {
     next(error);
   }
 };
+
+//User Login
 
 export const userLogin = async (req, res, next) => {
   try {
@@ -48,6 +49,7 @@ export const userLogin = async (req, res, next) => {
   }
 };
 
+// User Profile
 export const userProfile = async (req, res, next) => {
   const { user } = req;
 
@@ -56,12 +58,16 @@ export const userProfile = async (req, res, next) => {
   res.status(200).json(rest);
 };
 
+//User Logout
+
 export const UserLogout = async (req, res, next) => {
   res
     .clearCookie("cookie")
     .status(200)
     .json({ message: "User successfully logout" });
 };
+
+//User Update
 
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
@@ -98,10 +104,14 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
+//User Delete
 export const deleteUser = async (req, res, next) => {
   const { id } = req.params;
 
   await User.findByIdAndDelete(id);
 
-  res.clearCookie("cookie").status(200).json({ message: "User successfully deleted" });
+  res
+    .clearCookie("cookie")
+    .status(200)
+    .json({ message: "User successfully deleted" });
 };
