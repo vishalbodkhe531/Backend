@@ -31,7 +31,7 @@
   },
 ];
 
-// group value count 
+// group value count
 [
   {
     $group: {
@@ -78,6 +78,38 @@
     },
   },
   {
-    $limit: 3,   /// first 3 recordes show 
+    $limit: 3, /// first 3 recordes show
+  },
+];
+
+/// Group Average
+[
+  {
+    $group: {
+      _id: "$gender",
+      count: {
+        $avg: "$age",
+      },
+    },
+  },
+];
+
+// Group nested object access
+[
+  {
+    $group: {
+      _id: "$company.location.country",
+      count: {
+        $sum: 1,
+      },
+    },
+  },
+  {
+    $sort: {
+      count: -1,
+    },
+  },
+  {
+    $limit: 3,
   },
 ];
