@@ -113,3 +113,43 @@
     $limit: 3,
   },
 ];
+
+
+//Group and unwind
+
+[
+  {
+    $unwind: "$tags",
+  },
+  {
+    $group: {
+      _id: "$_id",
+      count: {
+        $sum: 1,
+      },
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      averageIs: {
+        $avg: "$count",
+      },
+    },
+  },
+];
+
+
+/// add fields
+
+[
+  {
+    $addFields: {
+      numberOfTages: {
+        $size: {
+          $ifNull: ["$tags", []],
+        },
+      },
+    },
+  },
+];
