@@ -2,9 +2,9 @@ import express from "express";
 import { config } from "dotenv";
 import { DatabaseConnection } from "./data/data.js";
 import UserRoutes from "./routes/user.routes.js";
-import { errorMiddleware } from "./middleware/error.middleware.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { errorMiddleware } from "./middleware/error.middleware.js";
 config({ path: "./config/.env" });
 
 DatabaseConnection();

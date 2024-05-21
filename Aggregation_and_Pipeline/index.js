@@ -116,6 +116,7 @@
 
 
 //Group and unwind
+//What is the average number of tages per user
 
 [
   {
@@ -140,7 +141,7 @@
 ];
 
 
-/// add fields
+/// Method two add fields
 
 [
   {
@@ -149,6 +150,28 @@
         $size: {
           $ifNull: ["$tags", []],
         },
+      },
+    },
+  },
+];
+
+
+// 
+[
+  {
+    $addFields: {
+      numberOfTags: {
+        $size: {
+          $ifNull: ["$tags", []],
+        },
+      },
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      avrageIs: {
+        $avg: "$numberOfTags",
       },
     },
   },
